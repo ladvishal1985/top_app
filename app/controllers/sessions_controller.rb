@@ -6,8 +6,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      remember user
-      redirect_to user # Compact Redirect: Rails automatically converts this to the route for the user’s profile page:
+      #remember user
+      #redirect_to user # Compact Redirect: Rails automatically converts this to the route for the user’s profile page:
+      redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
